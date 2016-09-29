@@ -9,12 +9,6 @@ module.exports = {
   externals: {
     jquery: 'jQuery'
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
-  ],
   output: {
     path: __dirname,
     filename: './public/bundle.js'
@@ -23,6 +17,17 @@ module.exports = {
     root: __dirname,
     extensions: ['', '.js', '.jsx']
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    })
+  ],
   module: {
     loaders: [
       {
@@ -35,5 +40,5 @@ module.exports = {
       }
     ]
   },
-  devtool: 'inline-source-map'
+  devtool: 'cheap-module-source-map'
 };
